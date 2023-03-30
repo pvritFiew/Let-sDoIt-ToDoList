@@ -1,0 +1,91 @@
+.template hr{
+    margin: 0;
+    background: rgb(101, 101, 101);
+    height: 3px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 10px 10px;
+  }
+  .header h2 {
+    margin: 0; /* remove default margin */
+    margin-left: 20px;
+  }
+  .select_mode {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .select_mode label{
+    margin-right: 20px;
+  }
+.template .header .select_mode .bg_mode{
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    color: rgb(65, 65, 65);
+}
+
+.template .header .select_mode .bg_mode::before{
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    background-color: gray;
+}
+
+.template .header .select_mode .bg_mode:checked::before{
+    transform: scale(1);
+}
+
+.navigate{
+    position: fixed;
+    top: 48px;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    padding: 20px;
+}
+
+.navigate .nav_item{
+    list-style: none;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    
+}
+.navigate .nav_item a{
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    margin-left: 20px;
+}
+
+.navigate .nav_item:hover{
+    background-color: rgb(83, 83, 83);
+}
+
+.navigate hr{
+    margin: 0;
+    background: rgb(101, 101, 101);
+    height: 0.5px;
+}
+.content{
+    margin-left: 280px;
+    margin-top: 50px;
+    position: relative;
+}

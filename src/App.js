@@ -1,24 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import Template from './Component/Template/template';
+import Box_of_event from './Component/molecule/box_of_event';
 
 function App() {
-  const [color, setColor] = useState('rgb(255, 0, 0)');
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
-      setColor(randomColor);
-    }, 1000);
+  const [events, setEvents] = useState([
+    {
+        id: 1,
+        name: "Event 1",
+        date: "01/01/2022",
+        description: "Description 1"
+    },
+    {
+        id: 2,
+        name: "Event 2",
+        date: "02/02/2022",
+        description: "Description 2"
+    }
+]);
 
-    return () => clearInterval(intervalId);
-  }, []);
+const handleRemove = (id) => {
+    setEvents(events.filter(event => event.id !== id));
+}
 
   return (
-    <div>
-      <h1 style={{ color }}>Hello World</h1>
-      <p style={{ color }}>This text is changing color dynamically</p>
-    </div>
+      <Template>
+        {events.map(event => (
+                <Box_of_event 
+                    key={event.id} 
+                    id={event.id} 
+                    name={event.name} 
+                    date={event.date} 
+                    description={event.description} 
+                    onRemove={handleRemove}
+                />
+            ))}
+      </Template>
   );
 }
 
