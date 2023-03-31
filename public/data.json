@@ -1,0 +1,9 @@
+[  {"days": "01/01/2023","events": [      
+    {"id": 1, "name": "Event 1", "date": "2022-01-01", "description": "Description 1", "finish":0},      
+    {"id": 2, "name": "Event 2", "date": "2022-02-02", "description": "Description 2", "finish":0},      
+    {"id": 3, "name": "Event 2", "date": "2022-02-02", "description": "Description 2", "finish":0},      
+    {"id": 4, "name": "Event 2", "date": "2022-02-02", "description": "Description 2", "finish":0},      
+    {"id": 5, "name": "Event 2", "date": "2022-02-02", "description": "Description 2", "finish":0}
+]
+}
+]

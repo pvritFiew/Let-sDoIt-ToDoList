@@ -13,7 +13,7 @@ function Template(props) {
       setBackgroundColor('rgb(229, 229, 229)');//Theme Light mode
       setColor('black');
       clearInterval(intervalId); //reset Theme color
-    } 
+    }
     else if (value === 'gray') {
       setBackgroundColor('rgb(65, 65, 65)');//Theme Dark mode
       setColor('white');
@@ -53,8 +53,8 @@ function Template(props) {
               </label>
 
             </div>
+            
         </div>
-      <hr />
       <div className='main'>
         <ul className='navigate' style={{ backgroundColor}}>
           <li className='nav_item' >
@@ -78,10 +78,12 @@ function Template(props) {
           </li>
           <hr />
         </ul>
-        <div className='content'>
+        
+
+      </div>
+      <div className='content'>
           {props.children}
         </div>
-      </div>
     </div>
   );
 }

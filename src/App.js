@@ -1,41 +1,27 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Template from './Component/Template/template';
-import Box_of_event from './Component/molecule/box_of_event';
+import All_event_show from './Component/organism/all_event_show'
+import axios from "axios";
 
 function App() {
 
-  const [events, setEvents] = useState([
-    {
-        id: 1,
-        name: "Event 1",
-        date: "01/01/2022",
-        description: "Description 1"
-    },
-    {
-        id: 2,
-        name: "Event 2",
-        date: "02/02/2022",
-        description: "Description 2"
-    }
-]);
+  const [data, setData] = useState([]);
 
-const handleRemove = (id) => {
-    setEvents(events.filter(event => event.id !== id));
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      const datas = await axios("./data.json");
+      setData(datas);
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data);
 
   return (
       <Template>
-        {events.map(event => (
-                <Box_of_event 
-                    key={event.id} 
-                    id={event.id} 
-                    name={event.name} 
-                    date={event.date} 
-                    description={event.description} 
-                    onRemove={handleRemove}
-                />
-            ))}
+        <All_event_show date="01/01/2023"/>
       </Template>
   );
 }

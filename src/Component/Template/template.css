@@ -1,13 +1,14 @@
-.template hr{
-    margin: 0;
-    background: rgb(101, 101, 101);
-    height: 3px;
-}
+
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0 10px 10px;
+    padding: 20px 0 10px 10px;
+    position: fixed;
+    width: 100%;
+    border-bottom: solid;
+    margin-top: -20px;
+    z-index: 12;
   }
   .header h2 {
     margin: 0; /* remove default margin */
@@ -55,11 +56,12 @@
 
 .navigate{
     position: fixed;
-    top: 48px;
+    top: 5px;
     left: 0;
     width: 200px;
     height: 100%;
     padding: 20px;
+    z-index: 11;
 }
 
 .navigate .nav_item{
@@ -86,6 +88,6 @@
 }
 .content{
     margin-left: 280px;
-    margin-top: 50px;
-    position: relative;
+    padding-top: 50px;
+    z-index: 10;
 }
