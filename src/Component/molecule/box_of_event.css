@@ -1,7 +1,6 @@
 .event-box{
     padding: 0 0 10px 0;
     width: 260px;
-    
 }
 .box-of-event{
     width: 200px;
@@ -12,6 +11,7 @@
     margin-top: 10px;
     margin-left: 10px;
     z-index: 1;
+    background-color: #fff;
 }
 .box-of-event:hover {
 

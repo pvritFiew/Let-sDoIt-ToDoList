@@ -9,6 +9,10 @@ function Box_of_event(props) {
     setIsChecked(!isChecked);
   };
 
+  const handleDelete = () => {
+    props.onDelete(props.id);
+  };
+
   return (
     <div className="event-box">
       <div className="round">
@@ -22,6 +26,7 @@ function Box_of_event(props) {
         <Trash
           style={{ marginLeft: "185px", marginTop: "15px", position: "absolute", color: "red" }}
           size={25}
+          onClick={handleDelete}
         />
       </div>
 

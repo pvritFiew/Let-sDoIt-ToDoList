@@ -9,6 +9,7 @@
     border-bottom: solid;
     margin-top: -20px;
     z-index: 12;
+    margin-left: -10px;
   }
   .header h2 {
     margin: 0; /* remove default margin */

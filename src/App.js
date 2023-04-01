@@ -1,28 +1,23 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Template from './Component/Template/template';
-import All_event_show from './Component/organism/all_event_show'
-import axios from "axios";
+import Today from './Pages/Today'
+import Create_event from './Pages/Create_event';
+import Calendar from './Pages/calendar';
+import Complete from './Pages/complete';
+import Uncomplete from './Pages/uncomplete';
+import './App.css';
 
 function App() {
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const datas = await axios("./data.json");
-      setData(datas);
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(data);
-
   return (
-      <Template>
-        <All_event_show date="01/01/2023"/>
-      </Template>
+        <Routes>
+            <Route path="/" element={<Today/>}></Route>
+            <Route path="/create_event" element={<Create_event/>}></Route>
+            <Route path="/calendar" element={<Calendar/>}></Route>
+            <Route path="/complete" element={<Complete/>}></Route>
+            <Route path="/uncomplete" element={<Uncomplete/>}></Route>
+        </Routes>
+
   );
 }
 

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import './template.css'
+import {Link } from 'react-router-dom';
 
 function Template(props) {
 
   const [backgroundColor, setBackgroundColor] = useState('rgb(229, 229, 229)');
+  const [backgroundContent, setBackgroundContent] = useState('white');
   const [Color, setColor] = useState('black');
   const [intervalId, setIntervalId] = useState(null);
 
@@ -11,11 +13,13 @@ function Template(props) {
     const value = event.target.value;
     if (value === 'white') {
       setBackgroundColor('rgb(229, 229, 229)');//Theme Light mode
+      setBackgroundContent('white');
       setColor('black');
       clearInterval(intervalId); //reset Theme color
     }
     else if (value === 'gray') {
       setBackgroundColor('rgb(65, 65, 65)');//Theme Dark mode
+      setBackgroundContent('gray');
       setColor('white');
       clearInterval(intervalId);//reset Theme color
     }
@@ -25,6 +29,7 @@ function Template(props) {
       const id = setInterval(() => {
         const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
         setBackgroundColor(randomColor);
+        setBackgroundContent(randomColor);
       }, 1000);//use setInterval for use timing to do something
       setIntervalId(id);//use useState for check condition value is random
     }
@@ -56,32 +61,33 @@ function Template(props) {
             
         </div>
       <div className='main'>
-        <ul className='navigate' style={{ backgroundColor}}>
-          <li className='nav_item' >
-            <a href='#'style={{color:Color }}>Today</a>
-          </li>
-          <hr />
-          <li className='nav_item'>
-            <a href='#'style={{color:Color }}>Calendar</a>
-          </li>
-          <hr />
-          <li className='nav_item'>
-            <a href='#'style={{color:Color }}>Create Event</a>
-          </li>
-          <hr />
-          <li className='nav_item'>
-            <a href='#'style={{color:Color }}>Uncomplete</a>
-          </li>
-          <hr />
-          <li className='nav_item'>
-            <a href='#'style={{color:Color }}>Completed</a>   
-          </li>
-          <hr />
-        </ul>
+      <ul className='navigate' style={{ backgroundColor}}>
+  <li className='nav_item' >
+    <Link to="/">Today</Link>
+  </li>
+  <hr />
+  <li className='nav_item'>
+    <Link to="/calendar">Calendar</Link>
+  </li>
+  <hr />
+  <li className='nav_item'>
+    <Link to="/create_event">Create Event</Link>
+  </li>
+  <hr />
+  <li className='nav_item'>
+    <Link to="/complete">Complete</Link>
+  </li>
+  <hr />
+  <li className='nav_item'>
+    <Link to="/uncomplete">Uncomplete</Link>  
+  </li>
+  <hr />
+</ul>
+
         
 
       </div>
-      <div className='content'>
+      <div className='content' style={{backgroundColor:backgroundContent}}>
           {props.children}
         </div>
     </div>
