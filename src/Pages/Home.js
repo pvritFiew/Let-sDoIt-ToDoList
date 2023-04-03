@@ -8,17 +8,21 @@ function Home() {
   
     useEffect(() => {
       const fetchData = async () => {
-        const response = await axios('../data.json');
+        const response = await axios.get("http://localhost:4000/api/events");
         setData(response.data);
       };
   
       fetchData();
     }, []);
+
+    const handleNewEvent = (newEvent) => {
+      setData((prevEvents) => [...prevEvents, newEvent]);
+    };
   
     return (
       <Template>
         {data.map((item, index) => (
-          <All_event_show data={data[index]} />
+          <All_event_show key={index} data={item} />
         ))}
       </Template>
     );
