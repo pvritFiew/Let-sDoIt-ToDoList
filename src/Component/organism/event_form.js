@@ -23,11 +23,25 @@ function EventForm(){
     try {
       const response = await axios.post("http://localhost:4000/api/events", newEvent);
       console.log(response.data);
+      const eventData = response.data;
+      const newEvents = {
+        days: eventData.date,
+        events: [{
+          name: eventData.name,
+          date: eventData.date,
+          description: eventData.description,
+          finish: eventData.finish,
+          id: eventData.id
+        }]
+      }
+      const allEventsResponse = await axios.post("http://localhost:4000/api/allevents", newEvents);
+      console.log(allEventsResponse.data);
       navigate.push("/");
     } catch (err) {
       console.log(err);
     }
   };
+  
     return(
         <div className="form-container">
         <h2>Create New Event</h2>

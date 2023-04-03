@@ -13,6 +13,11 @@ function Box_of_event(props) {
     props.onDelete(props.id);
   };
 
+  // return null if finish is equal to 1
+  if (props.finish === 1) {
+    return null;
+  }
+
   return (
     <div className="event-box">
       <div className="round">
@@ -24,7 +29,12 @@ function Box_of_event(props) {
         />
         <label htmlFor={`checkbox${props.id}`}></label>
         <Trash
-          style={{ marginLeft: "185px", marginTop: "15px", position: "absolute", color: "red" }}
+          style={{
+            marginLeft: "185px",
+            marginTop: "15px",
+            position: "absolute",
+            color: "red",
+          }}
           size={25}
           onClick={handleDelete}
         />
@@ -35,8 +45,13 @@ function Box_of_event(props) {
           <h3>{props.name}</h3>
         </div>
         <hr></hr>
+
         <div>
           <p>{props.description}</p>
+        </div>
+
+        <div>
+          <p>{props.date}</p>
         </div>
       </div>
     </div>
