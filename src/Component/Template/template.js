@@ -4,7 +4,7 @@ import {Link } from 'react-router-dom';
 
 function Template(props) {
 
-  const [backgroundColor, setBackgroundColor] = useState('rgb(229, 229, 229)');
+  const [backgroundColor, setBackgroundColor] = useState('rgb(240, 240, 240)');
   const [backgroundContent, setBackgroundContent] = useState('white');
   const [Color, setColor] = useState('black');
   const [intervalId, setIntervalId] = useState(null);
@@ -12,14 +12,14 @@ function Template(props) {
   function handleBackgroundColorChange(event) {
     const value = event.target.value;
     if (value === 'white') {
-      setBackgroundColor('rgb(229, 229, 229)');//Theme Light mode
+      setBackgroundColor('rgb(240, 240, 240)');//Theme Light mode
       setBackgroundContent('white');
       setColor('black');
       clearInterval(intervalId); //reset Theme color
     }
     else if (value === 'gray') {
-      setBackgroundColor('rgb(65, 65, 65)');//Theme Dark mode
-      setBackgroundContent('gray');
+      setBackgroundColor('rgb(34, 34, 34)');//Theme Dark mode
+      setBackgroundContent('rgb(54, 54, 54)');
       setColor('white');
       clearInterval(intervalId);//reset Theme color
     }
@@ -44,17 +44,17 @@ function Template(props) {
 
               <label>
                 Light Mode
-                <input type="radio" name="radio" className='bg_mode'value="white" checked={backgroundColor === 'rgb(229, 229, 229)'} onChange={handleBackgroundColorChange} />
+                <input type="radio" name="radio" className='bg_mode'value="white" checked={backgroundColor === 'rgb(240, 240, 240)'} onChange={handleBackgroundColorChange} />
               </label>
 
               <label>
                 Dark Mode
-                <input type="radio" name="radio" className='bg_mode'value="gray" checked={backgroundColor === 'rgb(65, 65, 65)'} onChange={handleBackgroundColorChange}/>
+                <input type="radio" name="radio" className='bg_mode'value="gray" checked={backgroundColor === 'rgb(34, 34, 34)'} onChange={handleBackgroundColorChange}/>
               </label>
 
               <label>
                 Random
-                <input type="radio" name="radio" className='bg_mode'value="random" checked={backgroundColor !== 'rgb(229, 229, 229)' && backgroundColor !== 'rgb(65, 65, 65)'} onChange={handleBackgroundColorChange}/>
+                <input type="radio" name="radio" className='bg_mode'value="random" checked={backgroundColor !== 'rgb(240, 240, 240)' && backgroundColor !== 'rgb(34, 34, 34)'} onChange={handleBackgroundColorChange}/>
               </label>
 
             </div>
@@ -63,23 +63,19 @@ function Template(props) {
       <div className='main'>
       <ul className='navigate' style={{ backgroundColor}}>
   <li className='nav_item' >
-    <Link to="/">Today</Link>
+    <Link to="/"style={{color:Color}}>Today</Link>
   </li>
   <hr />
   <li className='nav_item'>
-    <Link to="/calendar">Calendar</Link>
+    <Link to="/create_event"style={{color:Color}}>Create Event</Link>
   </li>
   <hr />
   <li className='nav_item'>
-    <Link to="/create_event">Create Event</Link>
+    <Link to="/complete"style={{color:Color}}>Complete</Link>
   </li>
   <hr />
   <li className='nav_item'>
-    <Link to="/complete">Complete</Link>
-  </li>
-  <hr />
-  <li className='nav_item'>
-    <Link to="/uncomplete">Uncomplete</Link>  
+    <Link to="/uncomplete"style={{color:Color}}>Uncomplete</Link>  
   </li>
   <hr />
 </ul>
@@ -88,7 +84,10 @@ function Template(props) {
 
       </div>
       <div className='content' style={{backgroundColor:backgroundContent}}>
+        <div className='content-box'>
           {props.children}
+        </div>
+          
         </div>
     </div>
   );

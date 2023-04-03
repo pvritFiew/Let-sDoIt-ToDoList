@@ -21,7 +21,6 @@ function AllEventShow(props) {
             key={event.id}
             id={event.id}
             name={event.name}
-            date={event.date}
             description={event.description}
             finish={event.finish}
             onDelete={handleDelete}

@@ -10,6 +10,7 @@
     border-radius: 7px;
     padding: 0 0 0 10px;
     width: 150px;
+    background-color: white;
 }
 .event-box-container{
     display: flex;

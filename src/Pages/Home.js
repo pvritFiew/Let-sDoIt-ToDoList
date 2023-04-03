@@ -3,7 +3,7 @@ import Template from '../Component/Template/template';
 import All_event_show from '../Component/organism/all_event_show';
 import axios from 'axios';
 
-function Today() {
+function Home() {
     const [data, setData] = useState([]);
   
     useEffect(() => {
@@ -24,4 +24,4 @@ function Today() {
     );
   }
   
-  export default Today;
+  export default Home;

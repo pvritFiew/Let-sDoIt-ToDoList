@@ -36,7 +36,6 @@ function Box_of_event(props) {
         </div>
         <hr></hr>
         <div>
-          <h5>{props.date}</h5>
           <p>{props.description}</p>
         </div>
       </div>
