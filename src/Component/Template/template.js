@@ -1,6 +1,8 @@
 import React, { useState} from 'react';
 import './template.css'
 import {Link } from 'react-router-dom';
+import {BsFillBrightnessHighFill , BsFillCloudMoonFill}from "react-icons/bs";
+import {FaRandom} from "react-icons/fa"
 
 function Template(props) {
 
@@ -42,18 +44,18 @@ function Template(props) {
             <h2>Let's Do It : To Do List</h2>
             <div className='select_mode'>
 
-              <label>
-                Light Mode
+              <label title="Light Mode">
+                <BsFillBrightnessHighFill style={{color:Color}} />
                 <input type="radio" name="radio" className='bg_mode'value="white" checked={backgroundColor === 'rgb(240, 240, 240)'} onChange={handleBackgroundColorChange} />
               </label>
 
-              <label>
-                Dark Mode
+              <label title="Night Mode">
+                < BsFillCloudMoonFill style={{color:Color}}/>
                 <input type="radio" name="radio" className='bg_mode'value="gray" checked={backgroundColor === 'rgb(34, 34, 34)'} onChange={handleBackgroundColorChange}/>
               </label>
 
-              <label>
-                Random
+              <label title="Random">
+                <FaRandom style={{color:Color}}/>
                 <input type="radio" name="radio" className='bg_mode'value="random" checked={backgroundColor !== 'rgb(240, 240, 240)' && backgroundColor !== 'rgb(34, 34, 34)'} onChange={handleBackgroundColorChange}/>
               </label>
 
@@ -63,7 +65,7 @@ function Template(props) {
       <div className='main'>
       <ul className='navigate' style={{ backgroundColor}}>
   <li className='nav_item' >
-    <Link to="/"style={{color:Color}}>Today</Link>
+    <Link to="/"style={{color:Color}}>Events</Link>
   </li>
   <hr />
   <li className='nav_item'>
