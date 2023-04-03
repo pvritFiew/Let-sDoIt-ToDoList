@@ -4,7 +4,7 @@ import "./organism.css";
 
 function CompleteShow(props) {
   const { data } = props;
-  const filteredEvents = data.events.filter((event) => event.finish === props.condition);
+  const filteredEvents = data && data.events ? data.events.filter((event) => event.finish === props.condition) : [];
 
   if (filteredEvents.length === 0) {
     return null; 

@@ -18,6 +18,9 @@ function Events() {
 
   return (
     <Template>
+      <div className='bg-text-navi'>
+        <h2>Events</h2>
+      </div>
       {data.map((item, index) => (
         <AllEventShow key={index} data={item} />
       ))}
