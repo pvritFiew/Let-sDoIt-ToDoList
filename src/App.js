@@ -4,6 +4,7 @@ import Events from './Pages/Events'
 import Create_event from './Pages/Create_event';
 import Complete from './Pages/complete';
 import Uncomplete from './Pages/uncomplete';
+import Edit from './Pages/Edit';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
             <Route path="/create_event" element={<Create_event/>}></Route>
             <Route path="/complete" element={<Complete/>}></Route>
             <Route path="/uncomplete" element={<Uncomplete/>}></Route>
+            <Route path="/edit/:eventId" element={<Edit/>}></Route>
         </Routes>
 
   );

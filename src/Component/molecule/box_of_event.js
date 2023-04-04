@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./box_of_event.css";
-import { Trash } from "react-bootstrap-icons";
+import { BorderStyle, Trash } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Box_of_event(props) {
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (props.finish === 1) {
+      setIsChecked(true);
+    }
+  }, [props.finish]);
 
   const handleTick = () => {
     setIsChecked(!isChecked);
@@ -11,16 +19,20 @@ function Box_of_event(props) {
 
   const handleDelete = () => {
     props.onDelete(props.id);
+    axios
+      .delete(`/api/events/${props.id}`)
+      .then(() => {
+        props.onDelete(props.id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
-  // return null if finish is equal to 1
-  if (props.finish === 1) {
-    return null;
-  }
 
   return (
     <div className="event-box">
       <div className="round">
+        {/* Check status did it or don't do yet */}
         <input
           type="checkbox"
           id={`checkbox${props.id}`}
@@ -39,23 +51,19 @@ function Box_of_event(props) {
           onClick={handleDelete}
         />
       </div>
-
-      <div className="box-of-event">
-        <div className="name-event-box">
-          <h3>{props.name}</h3>
+      <Link to={`/edit/${props.id}`} style={{ color: "black" }}>
+        <div className="box-of-event">
+          <div className="name-event-box">
+            <h3>{props.name}</h3>
+          </div>
+          <hr></hr>
+          <div>
+            <h5>{props.date}</h5>
+            <p>{props.description}</p>
+          </div>
         </div>
-        <hr></hr>
-
-        <div>
-          <p>{props.description}</p>
-        </div>
-
-        <div>
-          <p>{props.date}</p>
-        </div>
-      </div>
+      </Link>
     </div>
   );
 }
-
 export default React.memo(Box_of_event);
