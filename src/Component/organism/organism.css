@@ -1,8 +1,10 @@
 
 .box-date-show-main .date-show-main{
-    width: 160px;
+    width: 200px;
     margin-left: 20px;
     border-radius: 5px;
+    display: inline-flex;
+    flex-direction: row;
 }
 .date-show-main h2{
     margin-left: 10px;
@@ -12,6 +14,14 @@
     padding: 0 0 0 10px;
     width: 150px;
     background-color: white;
+}
+
+.date-show-main p{
+    color: white;
+    margin-top: 27px;
+    background-color: rgb(68, 68, 68);
+    height: 22px;
+    border-radius: 5px;
 }
 .event-box-container{
     display: flex;

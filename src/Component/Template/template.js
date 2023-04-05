@@ -2,7 +2,8 @@ import React, { useState, useEffect} from 'react';
 import './template.css'
 import {Link } from 'react-router-dom';
 import {BsFillBrightnessHighFill , BsFillCloudMoonFill}from "react-icons/bs";
-import {FaRandom} from "react-icons/fa"
+import {FaRandom,FaHome} from "react-icons/fa"
+import { Display } from 'react-bootstrap-icons';
 
 function Template(props) {
 
@@ -77,7 +78,7 @@ function Template(props) {
       <div className='main'>
       <ul className='navigate' style={{ backgroundColor}}>
   <li className='nav_item' >
-    <Link to="/"style={{color:Color}}>Events</Link>
+    <Link to="/"style={{color:Color}}><FaHome style={{color:Color}}/><a style={{color:Color}}>Home</a></Link>
   </li>
   <hr />
   <li className='nav_item'>
