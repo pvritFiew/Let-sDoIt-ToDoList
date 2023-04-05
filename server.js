@@ -1,45 +1,58 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-let data = require('./public/data.json');
+let data = require("./public/data.json");
 
-app.get('/api/events', (req, res) => {
+// Get all events
+app.get("/api/events", (req, res) => {
   res.json(data);
 });
 
-app.post('/api/events', (req, res) => {
+// Add a new event
+app.post("/api/events", (req, res) => {
   const newEvent = req.body;
   newEvent.id = data.length + 1;
   newEvent.finish = 0;
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString('en-US');
-  const existingDate = data.find((item) => item.days === formattedDate);
+  const existingDate = data.find((item) => item.days === newEvent.days);
   if (existingDate) {
     existingDate.events.push(newEvent);
   } else {
-    data.push({ days: formattedDate, events: [newEvent] });
+    data.push({ days: newEvent.days, events: [newEvent] });
   }
+  saveDataToFile(data);
   res.json(newEvent);
 });
 
-app.put('/api/events/:id', (req, res) => {
+// Update an existing event
+app.put("/api/events/:id", (req, res) => {
   const eventId = parseInt(req.params.id);
   const updatedEvent = req.body;
-  const eventIndex = data.findIndex((item) => item.id === eventId);
-  if (eventIndex >= 0) {
-    data[eventIndex] = { ...data[eventIndex], ...updatedEvent };
-    res.json(data[eventIndex]);
-  } else {
+  let foundEvent = false;
+
+  data.forEach((day) => {
+    const event = day.events.find((e) => e.id === eventId);
+    if (event) {
+      foundEvent = true;
+      Object.assign(event, updatedEvent);
+      saveDataToFile(data);
+      res.json(event);
+    }
+  });
+
+  if (!foundEvent) {
     res.status(404).json({ message: `Event with id ${eventId} not found.` });
   }
 });
 
-app.get('/api/events/:id', (req, res) => {
+// Get an event by id
+app.get("/api/events/:id", (req, res) => {
   const eventId = parseInt(req.params.id);
   const event = data
     .map((day) => day.events)
@@ -53,23 +66,40 @@ app.get('/api/events/:id', (req, res) => {
   }
 });
 
-app.delete('/api/events/:id', (req, res) => {
+// Delete an event by id
+app.delete("/api/events/:id", (req, res) => {
   const eventId = parseInt(req.params.id);
-  const eventIndex = data.findIndex((item) => item.events.some((event) => event.id === eventId));
+  let foundEvent = false;
 
-  if (eventIndex >= 0) {
-    const event = data[eventIndex].events.find((event) => event.id === eventId);
-    data[eventIndex].events = data[eventIndex].events.filter((event) => event.id !== eventId);
-    res.json(event);
-  } else {
+  data.forEach((day) => {
+    const index = day.events.findIndex((e) => e.id === eventId);
+    if (index !== -1) {
+      foundEvent = true;
+      day.events.splice(index, 1);
+      saveDataToFile(data);
+      res.json({ message: `Event with id ${eventId} has been deleted.` });
+    }
+  });
+
+  if (!foundEvent) {
     res.status(404).json({ message: `Event with id ${eventId} not found.` });
   }
 });
-
-
 
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+function saveDataToFile(data) {
+  fs.writeFile(
+    path.join(__dirname, "public", "data.json"),
+    JSON.stringify(data),
+    (err) => {
+      if (err) {
+        console.error(err);
+      }
+    }
+  );
+}

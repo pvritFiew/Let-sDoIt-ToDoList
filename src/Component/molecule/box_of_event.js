@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./box_of_event.css";
-import { BorderStyle, Trash } from "react-bootstrap-icons";
+import {Trash } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ function Box_of_event(props) {
   const handleDelete = () => {
     props.onDelete(props.id);
     axios
-      .delete(`/api/events/${props.id}`)
+      .delete(`http://localhost:4000/api/events/${props.id}`)
       .then(() => {
         props.onDelete(props.id);
       })
