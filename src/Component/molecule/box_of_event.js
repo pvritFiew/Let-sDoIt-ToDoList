@@ -14,8 +14,21 @@ function Box_of_event(props) {
   }, [props.finish]);
 
   const handleTick = () => {
+    const newValue = isChecked ? 0 : 1;
     setIsChecked(!isChecked);
+  
+    axios
+      .put(`http://localhost:4000/api/events/${props.id}`, {
+        finish: newValue,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  
 
   const handleDelete = () => {
     props.onDelete(props.id);
