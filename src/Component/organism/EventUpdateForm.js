@@ -38,7 +38,7 @@ function EventUpdateForm() {
     try {
       const response = await axios.put(`http://localhost:4000/api/events/${eventId}`, updatedEvent);
       console.log(response.data);
-      navigate.push("/");
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
