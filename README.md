@@ -5,11 +5,20 @@ This project is create By framework: React.js
 ## Before run this you should install npm in your terminal
         - npm install
 
+## All Libraly this project have
+    Libraly : command to install  //(if error about libraly)
+    - react-router-dom : npm install --save react-router-dom
+    - cors : npm install cors : 
+    - express : npm install express
+              : npm install express body-parser
+              : npm install express uuid
+    - axios : npm install axios
+
 ## How To Run This Project
     This project have server and client in itself,
     By server will connect with data.json for use data And client connect with server to CRUD with data
 
-###    ***YOU SHOULD RUN AT SERVER BRFORE CLIENT***
+***YOU SHOULD RUN AT SERVER BEFORE CLIENT***
     Step to run this project:
     1. Open 2 terminal (use Terminal for split run server and client)
     2. First terminal use command
