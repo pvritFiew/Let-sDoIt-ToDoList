@@ -7,12 +7,27 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+const port = process.env.PORT || 4000;
 let data = require("./public/data.json");
 
 // Get all events
 app.get("/api/events", (req, res) => {
   res.json(data);
+});
+
+// Get event by id
+app.get("/api/events/:id", (req, res) => {
+  const eventId = parseInt(req.params.id);
+  const event = data
+    .map((day) => day.events)
+    .flat()
+    .find((event) => event.id === eventId);
+
+  if (event) {
+    res.json(event);
+  } else {
+    res.status(404).json({ message: `Event with id ${eventId} not found.` });
+  }
 });
 
 // Add a new event
@@ -30,7 +45,7 @@ app.post("/api/events", (req, res) => {
   res.json(newEvent);
 });
 
-// Update an existing event
+// Update event
 app.put("/api/events/:id", (req, res) => {
   const eventId = parseInt(req.params.id);
   const updatedEvent = req.body;
@@ -51,22 +66,9 @@ app.put("/api/events/:id", (req, res) => {
   }
 });
 
-// Get an event by id
-app.get("/api/events/:id", (req, res) => {
-  const eventId = parseInt(req.params.id);
-  const event = data
-    .map((day) => day.events)
-    .flat()
-    .find((event) => event.id === eventId);
 
-  if (event) {
-    res.json(event);
-  } else {
-    res.status(404).json({ message: `Event with id ${eventId} not found.` });
-  }
-});
 
-// Delete an event by id
+// Delete event by id
 app.delete("/api/events/:id", (req, res) => {
   const eventId = parseInt(req.params.id);
   let foundEvent = false;
@@ -86,12 +88,13 @@ app.delete("/api/events/:id", (req, res) => {
   }
 });
 
-const port = process.env.PORT || 4000;
+
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
+//function to save what you doing on open web to file
 function saveDataToFile(data) {
   fs.writeFile(
     path.join(__dirname, "public", "data.json"),

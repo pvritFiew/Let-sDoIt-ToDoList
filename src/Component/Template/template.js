@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import './template.css'
 import {Link } from 'react-router-dom';
 import {BsFillBrightnessHighFill , BsFillCloudMoonFill}from "react-icons/bs";
@@ -6,34 +6,46 @@ import {FaRandom} from "react-icons/fa"
 
 function Template(props) {
 
-  const [backgroundColor, setBackgroundColor] = useState('rgb(240, 240, 240)');
-  const [backgroundContent, setBackgroundContent] = useState('white');
-  const [Color, setColor] = useState('black');
+  const [backgroundColor, setBackgroundColor] = useState(
+    localStorage.getItem('backgroundColor') || 'rgb(240, 240, 240)'
+  );
+  const [backgroundContent, setBackgroundContent] = useState(
+    localStorage.getItem('backgroundContent') || 'white'
+  );
+  const [Color, setColor] = useState(
+    localStorage.getItem('Color') || 'black'
+  );
   const [intervalId, setIntervalId] = useState(null);
+
+  useEffect(() => {
+    // Store values in local storage when they change
+    localStorage.setItem('backgroundColor', backgroundColor);
+    localStorage.setItem('backgroundContent', backgroundContent);
+    localStorage.setItem('Color', Color);
+  }, [backgroundColor, backgroundContent, Color]);
 
   function handleBackgroundColorChange(event) {
     const value = event.target.value;
     if (value === 'white') {
-      setBackgroundColor('rgb(240, 240, 240)');//Theme Light mode
+      setBackgroundColor('rgb(240, 240, 240)');
       setBackgroundContent('white');
       setColor('black');
       clearInterval(intervalId); //reset Theme color
     }
     else if (value === 'gray') {
-      setBackgroundColor('rgb(34, 34, 34)');//Theme Dark mode
+      setBackgroundColor('rgb(34, 34, 34)');
       setBackgroundContent('rgb(54, 54, 54)');
       setColor('white');
-      clearInterval(intervalId);//reset Theme color
+      clearInterval(intervalId); //reset Theme color
     }
-    else if (value === 'random') {//This condition for change color every 1 second
+    else if (value === 'random') {
       setColor('black');
-      clearInterval(intervalId);//reset Theme color
       const id = setInterval(() => {
         const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
         setBackgroundColor(randomColor);
         setBackgroundContent(randomColor);
-      }, 1000);//use setInterval for use timing to do something
-      setIntervalId(id);//use useState for check condition value is random
+      }, 1000);
+      setIntervalId(id);
     }
   }
 
@@ -85,10 +97,10 @@ function Template(props) {
         
 
       </div>
-      <div className='content' style={{backgroundColor:backgroundContent}}>
-        <div className='content-box'>
-          {props.children}
-        </div>
+        <div className='content' style={{backgroundColor:backgroundContent}}>
+          <div className='content-box'>
+            {props.children}
+          </div>
           
         </div>
     </div>
