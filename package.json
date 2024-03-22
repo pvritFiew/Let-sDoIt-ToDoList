@@ -20,14 +20,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "client": "cd client && npm start",
-    "build": "cd client && npm run build",
-    
+    "start": "vercel dev",
+"client": "react-scripts start",
+"build": "react-scripts build",
+"test": "react-scripts test",
+"eject": "react-scripts eject",
     "server": "node your-backend-server.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "vercel --prod",
   "postdeploy": "echo 'Deployment complete!'"
