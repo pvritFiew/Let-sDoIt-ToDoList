@@ -10,6 +10,10 @@ app.use(express.json());
 const port = process.env.PORT || 4000;
 let data = require("./public/data.json");
 
+module.exports = (req, res) => {
+  res.json(data);
+};
+
 // Get all events
 app.get("/api/events", (req, res) => {
   res.json(data);
