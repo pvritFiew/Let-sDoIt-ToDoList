@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Let-sDoIt-ToDoList/static/css/main.67d3a402.css",
+    "main.js": "/Let-sDoIt-ToDoList/static/js/main.bcfa33ad.js",
+    "index.html": "/Let-sDoIt-ToDoList/index.html",
+    "main.67d3a402.css.map": "/Let-sDoIt-ToDoList/static/css/main.67d3a402.css.map",
+    "main.bcfa33ad.js.map": "/Let-sDoIt-ToDoList/static/js/main.bcfa33ad.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.67d3a402.css",
+    "static/js/main.bcfa33ad.js"
+  ]
+}
